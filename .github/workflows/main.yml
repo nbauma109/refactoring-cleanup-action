@@ -1,0 +1,170 @@
+name: Run Eclipse Cleanups
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Eclipse Cleanups
+        uses: nbauma109/refactoring-cleanup-action@v1
+        with:
+          project-root: "."
+          source-level: "21"
+          extra-classpath: ""
+
+          cleanup.array_with_curly: true
+          cleanup.use_autoboxing: true
+          cleanup.overridden_assignment_move_decl: true
+          cleanup.always_use_this_for_non_static_method_access: true
+          cleanup.remove_trailing_whitespaces_ignore_empty: true
+          cleanup.system_property_javaspecversion: true
+          cleanup.primitive_comparison: true
+          cleanup.system_property_file_encoding: true
+          cleanup.format_source_code_changes_only: true
+          cleanup.remove_redundant_semicolons: true
+          cleanup.useless_continue: true
+          cleanup.qualify_static_member_accesses_through_subtypes_with_declaring_class: true
+          cleanup.remove_redundant_type_arguments: true
+          cleanup.remove_unused_imports: true
+          cleanup.break_loop: true
+          cleanup.pull_up_assignment: true
+          cleanup.stringbuilder: true
+          cleanup.arrays_fill: true
+          cleanup.no_super: true
+          cleanup.use_lambda: true
+          cleanup.operand_factorization: true
+          cleanup.simplify_lambda_expression_and_method_ref: true
+          cleanup.always_use_blocks: true
+          cleanup.stringconcat_to_textblock: true
+          cleanup.sort_members_all: true
+          cleanup.system_property_path_separator: true
+          cleanup.instanceof: true
+          cleanup.precompile_regex: true
+          cleanup.add_missing_annotations: true
+          cleanup.always_use_this_for_non_static_field_access: true
+          cleanup.boolean_literal: true
+          cleanup.sort_members: true
+          cleanup.always_use_parentheses_in_expressions: true
+          cleanup.remove_unused_method_parameters: true
+          cleanup.remove_unused_local_variables: true
+          cleanup.add_missing_deprecated_annotations: true
+          cleanup.no_string_creation: true
+          cleanup.use_unboxing: true
+          cleanup.use_blocks_only_for_return_and_throw: true
+          cleanup.standard_comparison: true
+          cleanup.if_condition: true
+          cleanup.system_property_line_separator: true
+          cleanup.remove_trailing_whitespaces: true
+          cleanup.map_cloning: true
+          cleanup.add_serial_version_id: true
+          cleanup.try_with_resource: true
+          cleanup.use_this_for_non_static_method_access: true
+          cleanup.use_this_for_non_static_method_access_only_if_necessary: true
+          cleanup.single_used_field: true
+          cleanup.reduce_indentation: true
+          cleanup.primitive_parsing: true
+          cleanup.make_local_variable_final: true
+          cleanup.add_missing_methods: false  # known to fail → disabled
+          cleanup.qualify_static_member_accesses_with_declaring_class: true
+          cleanup.add_missing_override_annotations: true
+          cleanup.use_blocks: true
+          cleanup.multi_catch: true
+          cleanup.collection_cloning: true
+          cleanup.pull_out_if_from_if_else: true
+          cleanup.make_variable_declarations_final: true
+          cleanup.convert_to_enhanced_for_loop_if_loop_var_used: true
+          cleanup.redundant_comparator: true
+          cleanup.remove_unused_private_types: true
+          cleanup.system_property_boolean: true
+          cleanup.qualify_static_method_accesses_with_declaring_class: true
+          cleanup.organize_imports: false  # unsupported in headless mode
+          cleanup.lazy_logical_operator: true
+          cleanup.bitwise_conditional_expression: true
+          cleanup.simplify_boolean_if_else: true
+          cleanup.add_all: true
+          cleanup.use_directly_map_method: true
+          cleanup.system_property_file_separator: true
+          cleanup.qualify_static_field_accesses_with_declaring_class: true
+          cleanup.add_generated_serial_version_id: true
+          cleanup.stringbuilder_for_local_vars: true
+          cleanup.controlflow_merge: true
+          cleanup.comparing_on_criteria: true
+          cleanup.do_while_rather_than_while: true
+          cleanup.primitive_serialization: true
+          cleanup.stringbuffer_to_stringbuilder: true
+          cleanup.extract_increment: true
+          cleanup.comparison_statement: true
+          cleanup.insert_inferred_type_arguments: true
+          cleanup.make_private_fields_final: true
+          cleanup.remove_unnecessary_suppress_warnings: true
+          cleanup.useless_return: true
+          cleanup.instanceof_keyword: true
+          cleanup.use_this_for_non_static_field_access_only_if_necessary: true
+          cleanup.one_if_rather_than_duplicate_blocks_that_fall_through: true
+          cleanup.remove_trailing_whitespaces_all: true
+          cleanup.valueof_rather_than_instantiation: true
+          cleanup.plain_replacement: true
+          cleanup.remove_unnecessary_array_creation: true
+          cleanup.remove_private_constructors: true
+          cleanup.make_parameters_final: true
+          cleanup.substring: true
+          cleanup.ternary_operator: true
+          cleanup.replace_deprecated_calls: true
+          cleanup.merge_conditional_blocks: true
+          cleanup.return_expression: true
+          cleanup.system_property: true
+          cleanup.unlooped_while: true
+          cleanup.convert_to_enhanced_for_loop: true
+          cleanup.remove_unused_private_fields: true
+          cleanup.never_use_blocks: false
+          cleanup.remove_redundant_modifiers: true
+          cleanup.unreachable_block: true
+          cleanup.switch: true
+          cleanup.redundant_falling_through_block_end: true
+          cleanup.number_suffix: true
+          cleanup.also_simplify_lambda: true
+          cleanup.system_property_javaversion: true
+          cleanup.replace_deprecated_fields: true
+          cleanup.remove_unnecessary_nls_tags: true
+          cleanup.convert_to_switch_expressions: true
+          cleanup.use_this_for_non_static_field_access: true
+          cleanup.use_string_is_blank: true
+          cleanup.static_inner_class: true
+          cleanup.qualify_static_member_accesses_through_instances_with_declaring_class: true
+          cleanup.add_missing_nls_tags: true
+          cleanup.remove_unnecessary_casts: true
+          cleanup.objects_equals: true
+          cleanup.convert_functional_interfaces: true
+          cleanup.else_if: true
+          cleanup.format_source_code: true
+          cleanup.boolean_value_rather_than_comparison: true
+          cleanup.add_default_serial_version_id: true
+          cleanup.remove_unused_private_methods: true
+          cleanup.make_type_abstract_if_missing_method: true
+          cleanup.join: true
+          cleanup.embedded_if: true
+          cleanup.use_anonymous_class_creation: true
+          cleanup.invert_equals: true
+          cleanup.add_missing_override_annotations_interface_methods: true
+          cleanup.switch_for_instanceof_pattern: true
+          cleanup.remove_unused_private_members: true
+          cleanup.never_use_parentheses_in_expressions: false
+          cleanup.strictly_equal_or_different: true
+          cleanup.push_down_negation: true
+          cleanup.evaluate_nullable: true
+          cleanup.use_parentheses_in_expressions: true
+          cleanup.hash: true
+          cleanup.stringconcat_stringbuffer_stringbuilder: true
+          cleanup.double_negation: true
+          cleanup.overridden_assignment: true
+          cleanup.primitive_rather_than_wrapper: true
+          cleanup.correct_indentation: true
+          cleanup.use_var: true
