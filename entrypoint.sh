@@ -93,6 +93,9 @@ cat "$PROFILE_FILE"
 # Run cleanup
 # ------------------------------
 
+echo "Running Eclipse cleanup..."
+
+set +e
 "$ECLIPSE_HOME/eclipse" \
   -nosplash \
   -application io.github.nbauma109.refactoring.cli.app \
@@ -100,5 +103,38 @@ cat "$PROFILE_FILE"
   --source "$SOURCE_LEVEL" \
   --classpath "$EXTRA_CLASSPATH" \
   "$PROJECT_ROOT"
+EXIT_CODE=$?
+set -e
 
-cat /opt/eclipse/configuration/*.log
+echo
+echo "=========== ECLIPSE LOG OUTPUT ==========="
+
+LOG_DIR="$ECLIPSE_HOME/configuration"
+
+if [ -d "$LOG_DIR" ]; then
+    echo "Log directory: $LOG_DIR"
+    echo "Contents:"
+    ls -al "$LOG_DIR"
+
+    LOG_FILE=$(ls -1t "$LOG_DIR"/*.log 2>/dev/null | head -1 || true)
+
+    if [ -n "$LOG_FILE" ] && [ -f "$LOG_FILE" ]; then
+        echo
+        echo "Showing latest log file: $LOG_FILE"
+        echo "------------------------------------"
+        cat "$LOG_FILE"
+        echo
+    else
+        echo "No .log file found in configuration directory."
+    fi
+else
+    echo "Log directory does not exist: $LOG_DIR"
+fi
+
+echo "=========================================="
+echo "Eclipse exit code = $EXIT_CODE"
+
+if [ "$EXIT_CODE" -ne 0 ]; then
+    echo "ERROR: Eclipse terminated with failure."
+    exit "$EXIT_CODE"
+fi
