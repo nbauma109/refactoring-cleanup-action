@@ -59,7 +59,7 @@ eclipse-download "$ECLIPSE_VERSION" "java"
 
 ECLIPSE_HOME=$(cat /opt/eclipse_home)
 
-echo "Installing plugin..."
+echo "Installing plugin $PLUGIN_JAR into $ECLIPSE_HOME/dropins/ ..."
 cp "$PLUGIN_JAR" "$ECLIPSE_HOME/dropins/"
 
 # ------------------------------
@@ -100,3 +100,5 @@ cat "$PROFILE_FILE"
   --source "$SOURCE_LEVEL" \
   --classpath "$EXTRA_CLASSPATH" \
   "$PROJECT_ROOT"
+
+cat /opt/eclipse/configuration/*.log
