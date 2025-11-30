@@ -19,6 +19,23 @@ if [ -z "$SOURCE_LEVEL" ]; then
   exit 1
 fi
 
+# Convert to absolute paths
+PROJECT_ROOT="$(realpath "$PROJECT_ROOT")"
+
+# Normalize EXTRA_CLASSPATH into absolute paths
+if [ -n "$EXTRA_CLASSPATH" ]; then
+  ABS_CLASSPATH=""
+  IFS=':' read -ra CP_ENTRIES <<< "$EXTRA_CLASSPATH"
+  for entry in "${CP_ENTRIES[@]}"; do
+    if [ -z "$entry" ]; then
+      continue
+    fi
+    abs="$(realpath "$entry")"
+    ABS_CLASSPATH="${ABS_CLASSPATH:+$ABS_CLASSPATH:}$abs"
+  done
+  EXTRA_CLASSPATH="$ABS_CLASSPATH"
+fi
+
 # Base directory for all temporary and generated files
 BASE_DIR="$HOME/.refactoring-cli"
 mkdir -p "$BASE_DIR"
