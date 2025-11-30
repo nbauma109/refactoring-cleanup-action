@@ -108,11 +108,11 @@ cat > "$PROFILE_FILE" <<EOF
   <profile kind="CleanUpProfile" name="github-action" version="2">
 EOF
 
-# Convert INPUT_CLEANUP_* → cleanup.x.y.z entries
+# Correct mapping: cleanup.<lowercase_rest>
 while IFS='=' read -r key val; do
   if [[ "$key" =~ ^INPUT_CLEANUP_ ]]; then
     raw="${key#INPUT_CLEANUP_}"
-    setting=$(echo "$raw" | tr '[:upper:]' '[:lower:]' | tr '_' '.')
+    setting=$(echo "$raw" | tr '[:upper:]' '[:lower:]')   # keep underscores
     echo "    <setting id=\"cleanup.$setting\" value=\"$val\"/>" >> "$PROFILE_FILE"
   fi
 done < <(env)
