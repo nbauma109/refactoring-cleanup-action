@@ -168,3 +168,8 @@ inputs:
 runs:
   using: "docker"
   image: "Dockerfile"
+  args:
+    - ${{ inputs.project-root }}
+    - ${{ inputs.source-level }}
+    - ${{ inputs.extra-classpath }}
+    - ${{ inputs.cleanup-options-json }}
