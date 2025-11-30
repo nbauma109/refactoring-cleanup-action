@@ -8,9 +8,15 @@ EXTRA_CLASSPATH="${INPUT_EXTRA_CLASSPATH:-}"
 if [ -z "$PROJECT_ROOT" ]; then
   echo "FATAL: INPUT_PROJECT_ROOT is required"; exit 1
 fi
-
 if [ -z "$SOURCE_LEVEL" ]; then
   echo "FATAL: INPUT_SOURCE_LEVEL is required"; exit 1
+fi
+
+# Convert to absolute paths
+PROJECT_ROOT="$(realpath "$PROJECT_ROOT")"
+
+if [ -n "$EXTRA_CLASSPATH" ]; then
+  EXTRA_CLASSPATH="$(realpath "$EXTRA_CLASSPATH")"
 fi
 
 # ------------------------------
