@@ -126,30 +126,28 @@ echo "Generated cleanup profile at $PROFILE_FILE:"
 cat "$PROFILE_FILE"
 
 # ------------------------------
-# Assemble Eclipse arguments
-# ------------------------------
-
-ECLIPSE_ARGS=(
-  -nosplash
-  -data "$WORKSPACE_DIR"
-  -application io.github.nbauma109.refactoring.cli.app
-  --profile "$PROFILE_FILE"
-  --source "$SOURCE_LEVEL"
-)
-
-if [ -n "$EXTRA_CLASSPATH" ]; then
-  ECLIPSE_ARGS+=( --classpath "$EXTRA_CLASSPATH" )
-fi
-
-ECLIPSE_ARGS+=( "$PROJECT_ROOT" )
-
-# ------------------------------
 # Launch Eclipse
 # ------------------------------
 
+echo "Starting Xvfb..."
+XVFB_DISPLAY=":99"
+Xvfb "$XVFB_DISPLAY" -screen 0 1920x1080x24 >$HOME/xvfb.log 2>&1 &
+export DISPLAY="$XVFB_DISPLAY"
+
+sleep 2
+
+echo "Running Eclipse cleanup inside virtual display $DISPLAY..."
+
 echo "Running Eclipse cleanup..."
 set +e
-"$ECLIPSE_HOME/eclipse" "${ECLIPSE_ARGS[@]}"
+"$ECLIPSE_HOME/eclipse" \
+  -nosplash \
+  -data "$WORKSPACE_DIR" \
+  -application io.github.nbauma109.refactoring.cli.app \
+  --profile "$PROFILE_FILE" \
+  --source "$SOURCE_LEVEL" \
+  ${EXTRA_CLASSPATH:+--classpath "$EXTRA_CLASSPATH"} \
+  "$PROJECT_ROOT"
 EXIT_CODE=$?
 set -e
 
