@@ -93,11 +93,15 @@ cat "$PROFILE_FILE"
 # Run cleanup
 # ------------------------------
 
-echo "Running Eclipse cleanup..."
+WORKSPACE="/tmp/eclipse-workspace"
+mkdir -p "$WORKSPACE"
+
+echo "Running Eclipse cleanup using workspace: $WORKSPACE"
 
 set +e
 "$ECLIPSE_HOME/eclipse" \
   -nosplash \
+  -data "$WORKSPACE" \
   -application io.github.nbauma109.refactoring.cli.app \
   --profile "$PROFILE_FILE" \
   --source "$SOURCE_LEVEL" \
