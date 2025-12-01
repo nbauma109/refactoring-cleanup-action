@@ -44,6 +44,22 @@ WORKSPACE_DIR="$HOME/eclipse-workspace"
 mkdir -p "$WORKSPACE_DIR"
 
 # ------------------------------
+# Enforce spaces instead of tabs in Eclipse formatter
+# ------------------------------
+FORMATTER_PREFS="$WORKSPACE_DIR/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.core.prefs"
+
+mkdir -p "$FORMATTER_PREFS"
+
+cat > "$FORMATTER_PREFS" <<EOF
+eclipse.preferences.version=1
+org.eclipse.jdt.core.formatter.use_tabs_only_for_leading_indentations=false
+org.eclipse.jdt.core.formatter.tabulation.char=space
+org.eclipse.jdt.core.formatter.tabulation.size=4
+org.eclipse.jdt.core.formatter.indentation.size=4
+org.eclipse.jdt.core.formatter.formatter_profile=org.eclipse.jdt.core.defaultJavaFormatterProfile
+EOF
+
+# ------------------------------
 # Extract pom.xml from plugin
 # ------------------------------
 
