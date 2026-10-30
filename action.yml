@@ -18,14 +18,6 @@ inputs:
     default: ""
 
   # All the cleanup.* options…
-  cleanup.format_comment:                       { default: "false" }
-  cleanup.format_single_line_comment:           { default: "false" }
-  cleanup.format_multi_line_comment:            { default: "false" }
-  cleanup.format_javadoc:                       { default: "false" }
-  cleanup.use_arguments_for_raw_type_references: { default: "false" }
-  cleanup.add_necessary_suppress_warnings:      { default: "false" }
-  cleanup.organize_imports:                     { default: "false" }
-  cleanup.add_missing_methods:                  { default: "false" }
   cleanup.module_imports:                 { default: "false" }
   cleanup.array_with_curly:                 { default: "false" }
   cleanup.use_autoboxing:                   { default: "false" }
