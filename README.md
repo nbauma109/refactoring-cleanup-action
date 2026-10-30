@@ -38,6 +38,7 @@ jobs:
           ######################################################################
 
           # Formatter
+          cleanup_module_imports: false
           cleanup_format_source_code: false
           cleanup_format_source_code_changes_only: false
           cleanup_remove_trailing_whitespaces: true
