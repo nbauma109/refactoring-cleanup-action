@@ -164,7 +164,7 @@ inputs:
   cleanup.primitive_rather_than_wrapper:    { default: "false" }
   cleanup.correct_indentation:              { default: "false" }
   cleanup.use_var:                          { default: "false" }
-  cleanup.use_module_imports:               { default: "false" }
+  cleanup.module_imports:               { default: "false" }
 
 runs:
   using: "docker"
