@@ -2,8 +2,6 @@ This is the Github action for project [refactoring-cli](https://github.com/nbaum
 
 It's used to execute Eclipse Source Clean-Ups (equivalent of right-click menu `Source -> Clean Up`).
 
-The action exposes the Eclipse 2026-09 cleanup profile settings. The following additional settings are available (all default to `false`): `cleanup_format_comment`, `cleanup_format_single_line_comment`, `cleanup_format_multi_line_comment`, `cleanup_format_javadoc`, `cleanup_use_arguments_for_raw_type_references`, `cleanup_add_necessary_suppress_warnings`, `cleanup_organize_imports`, and `cleanup_add_missing_methods`. The Java 25 module-import cleanup is available as `cleanup_module_imports`. These names map to the corresponding Eclipse `cleanup.*` profile identifiers.
-
 To raise a pull request with the suggested changes, configure a workflow file with all the desired cleanups:
 
 ```yml
