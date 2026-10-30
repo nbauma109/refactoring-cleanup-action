@@ -105,7 +105,7 @@ jobs:
           ######################################################################
 
           # Java 25
-          cleanup_use_module_imports: false
+          cleanup_module_imports: false
 
           # Java 21
           cleanup_switch_for_instanceof_pattern: false
