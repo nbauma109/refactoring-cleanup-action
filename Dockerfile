@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21
+FROM eclipse-temurin:25
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -28,7 +28,10 @@ RUN apt-get update && \
 COPY eclipse-download.sh /usr/local/bin/eclipse-download
 RUN chmod +x /usr/local/bin/eclipse-download
 
-COPY plugin/io.github.nbauma109.refactoring.cli-1.0.1.jar /opt/io.github.nbauma109.refactoring.cli-1.0.1.jar
+RUN curl --fail --location --silent --show-error --retry 3 \
+      https://github.com/nbauma109/refactoring-cli/releases/download/2.0.0/io.github.nbauma109.refactoring.cli-2.0.0.jar \
+      --output /opt/io.github.nbauma109.refactoring.cli-2.0.0.jar && \
+    echo "38bd5b5cb94d013eab5674d3c11b7f6c33f136306b2556b28c66925aece4f0dc  /opt/io.github.nbauma109.refactoring.cli-2.0.0.jar" | sha256sum --check
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
