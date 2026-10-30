@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21
+FROM eclipse-temurin:25
 
 ENV DEBIAN_FRONTEND=noninteractive
 

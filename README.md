@@ -2,6 +2,8 @@ This is the Github action for project [refactoring-cli](https://github.com/nbaum
 
 It's used to execute Eclipse Source Clean-Ups (equivalent of right-click menu `Source -> Clean Up`).
 
+The action runs Eclipse with Java 25. The `source_level` input specifies the source language level of the project being cleaned, which can be lower than Java 25.
+
 To raise a pull request with the suggested changes, configure a workflow file with all the desired cleanups:
 
 ```yml
@@ -28,10 +30,10 @@ jobs:
           persist-credentials: false
 
       - name: Run refactoring action
-        uses: nbauma109/refactoring-cleanup-action@v3
+        uses: nbauma109/refactoring-cleanup-action@v4
         with:
           project_root: .
-          source_level: "21"
+          source_level: "25"
 
           ######################################################################
           # Code Organizing

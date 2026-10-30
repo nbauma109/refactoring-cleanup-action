@@ -10,7 +10,7 @@ inputs:
     description: "Root directory of the Java project to clean"
     required: true
   source-level:
-    description: "Java source level (e.g. 21)"
+    description: "Java source level (e.g. 25); may be lower than the Java 25 runtime"
     required: true
   extra-classpath:
     description: "Additional classpath entries (optional)"
