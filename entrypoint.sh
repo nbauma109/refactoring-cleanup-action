@@ -62,7 +62,7 @@ org.eclipse.jdt.core.formatter.formatter_profile=org.eclipse.jdt.core.defaultJav
 EOF
 
 # ------------------------------
-# Extract pom.xml from plugin
+# Select Eclipse release
 # ------------------------------
 
 PLUGIN_JAR="/opt/io.github.nbauma109.refactoring.cli-1.0.1.jar"
@@ -72,32 +72,10 @@ if [ ! -f "$PLUGIN_JAR" ]; then
   exit 1
 fi
 
-TMP_POM_DIR="$BASE_DIR/pom"
-rm -rf "$TMP_POM_DIR"
-mkdir -p "$TMP_POM_DIR"
+ECLIPSE_VERSION="${INPUT_ECLIPSE_VERSION:-2026-09}"
 
-# Extract pom.xml in an isolated directory
-pushd "$TMP_POM_DIR" >/dev/null
-
-jar xf "$PLUGIN_JAR" \
-  META-INF/maven/io.github.nbauma109/io.github.nbauma109.refactoring.cli/pom.xml
-
-if [ ! -f META-INF/maven/io.github.nbauma109/io.github.nbauma109.refactoring.cli/pom.xml ]; then
-  echo "FATAL: Could not extract pom.xml from plugin JAR."
-  popd >/dev/null
-  exit 1
-fi
-
-POM="$TMP_POM_DIR/META-INF/maven/io.github.nbauma109/io.github.nbauma109.refactoring.cli/pom.xml"
-
-ECLIPSE_REPO_URL=$(grep -oPm1 "(?<=<eclipse.release.repo>)[^<]+" "$POM" || true)
-ECLIPSE_VERSION="${ECLIPSE_REPO_URL##*/}"
-
-popd >/dev/null
-rm -rf "$TMP_POM_DIR"
-
-if [ -z "$ECLIPSE_VERSION" ]; then
-  echo "FATAL: Could not extract Eclipse version from pom.xml"
+if [[ ! "$ECLIPSE_VERSION" =~ ^[0-9]{4}-(03|06|09|12)$ ]]; then
+  echo "FATAL: Eclipse version must use YYYY-MM with a quarterly release month."
   exit 1
 fi
 

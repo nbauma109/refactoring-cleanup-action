@@ -2,6 +2,8 @@ This is the Github action for project [refactoring-cli](https://github.com/nbaum
 
 It's used to execute Eclipse Source Clean-Ups (equivalent of right-click menu `Source -> Clean Up`).
 
+The action uses **Eclipse IDE 2026-09** by default, the latest generally available quarterly release as of October 2026. The optional `eclipse_version` input allows selecting another Eclipse quarterly release without rebuilding the packaged refactoring plugin. The runtime release is independent of the plugin's Maven target repository; plugin compatibility should be verified when upgrading Eclipse.
+
 To raise a pull request with the suggested changes, configure a workflow file with all the desired cleanups:
 
 ```yml
@@ -28,10 +30,11 @@ jobs:
           persist-credentials: false
 
       - name: Run refactoring action
-        uses: nbauma109/refactoring-cleanup-action@v3
+        uses: nbauma109/refactoring-cleanup-action@v4
         with:
           project_root: .
           source_level: "21"
+          eclipse_version: "2026-09"
 
           ######################################################################
           # Code Organizing

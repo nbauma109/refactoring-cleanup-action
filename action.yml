@@ -16,6 +16,10 @@ inputs:
     description: "Additional classpath entries (optional)"
     required: false
     default: ""
+  eclipse_version:
+    description: "Eclipse IDE release (YYYY-MM)"
+    required: false
+    default: "2026-09"
 
   # All the cleanup.* options…
   cleanup.array_with_curly:                 { default: "false" }
